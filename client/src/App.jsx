@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div>
       <h1 class="text-3xl font-bold underline">
-        Hello world! - welcom
+        Hello world! - welcom.
       </h1>
     </div>
   )
