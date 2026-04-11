@@ -21,7 +21,7 @@ const Sidebar = () => {
         setMobileOpen(false);
     }, [pathname]); // when ever pathname changes it close the mobile menu
 
-    const role = "" || "EMPLOYEE";
+    const role = "ADMIN" || "EMPLOYEE";
     const navItems = [
         { name: "Dashboard", href: "/dashboard", icon: LayoutGridIcon },
         role === "ADMIN" ?
