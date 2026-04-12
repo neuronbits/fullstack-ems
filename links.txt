@@ -1,1 +1,6 @@
 https://youtu.be/dlu8PmKXopU?t=9629
+
+git remote set-url origin https://neuronbits:TOKEN@github.com/neuronbits/fullstack-ems.git
+
+git remote set-url origin https://username:token@github.com/username/repository.git
+
