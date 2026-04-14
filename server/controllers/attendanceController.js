@@ -3,7 +3,7 @@
 // POST /api/attendance
 
 import Attendance from "../models/Attendance.js";
-import Employee from "../models/Employee";
+import Employee from "../models/Employee.js";
 
 export const clockInOut = async (req, res) => {
     try {
