@@ -6,3 +6,20 @@ git remote set-url origin https://username:token@github.com/username/repository.
 
 
 https://youtu.be/dlu8PmKXopU?t=15309
+
+
+cd server
+npm init -y
+npm install express cors dotenv multer jsonwebtoken bcrypt mongoose
+
+npm i --save-dev nodemon // for dev only to restart server on each change automatically
+npm i --save-dev @types/node
+
+npm run server
+
+mongodb: ems_db_user
+2YGYYTFmhbnvvBa2
+
+npm install mongoose
+mongodb+srv://ems_db_user:2YGYYTFmhbnvvBa2@cluster0.pnpt9jl.mongodb.net/
+mongodb+srv://ems_db_user:2YGYYTFmhbnvvBa2@cluster0.pnpt9jl.mongodb.net/?appName=Cluster0
