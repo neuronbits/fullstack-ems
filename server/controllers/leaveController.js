@@ -2,11 +2,10 @@
 // Create Leave
 // POST /api/leaves
 
-const { stat } = require("node:fs");
-const { default: Employee } = require("../models/Employee.js");
-const { default: LeaveApplication } = require("../models/LeaveApplication.js");
+import Employee from "../models/Employee.js";
+import LeaveApplication from "../models/LeaveApplication.js";
 
-const createLeave = async (req, res) => {
+export const createLeave = async (req, res) => {
     try {
         const session = req.session;
         const employee = await Employee.findOne({ userId: session.userId });
@@ -49,7 +48,7 @@ const createLeave = async (req, res) => {
 // Get Leaves
 // GET /api/leaves
 
-const getLeaves = async (req, res) => {
+export const getLeaves = async (req, res) => {
     try {
         const session = req.session;
         const isAdmin = session.role === "ADMIN";
@@ -83,7 +82,7 @@ const getLeaves = async (req, res) => {
 // Update leave status
 // PUT /api/leaves/:id
 
-const updateLeaveStatus = async (req, res) => {
+export const updateLeaveStatus = async (req, res) => {
     try {
         const { status } = req.body;
         if (!["PENDING", "APPROVED", "REJECTED"].includes(status)) {
