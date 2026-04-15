@@ -1,4 +1,4 @@
-
+//
 // Clock in/out for employee.
 // POST /api/attendance
 
