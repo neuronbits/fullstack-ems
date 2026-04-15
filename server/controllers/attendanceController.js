@@ -1,5 +1,5 @@
 
-// Clock in/out for employee
+// Clock in/out for employee.
 // POST /api/attendance
 
 import Attendance from "../models/Attendance.js";
