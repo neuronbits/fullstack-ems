@@ -28,7 +28,7 @@ export const getEmployees = async (req, res) => {
         // res.status(200).json({ success: true, data: result });
     } catch (error) {
         return res.status(500).json({ error: "Failed to fetch employees " });
-        // res.status(500).json({ success: false, message: error.message });
+        // res.status(500).json({ success: false, error: error.message });
     }
 }
 
@@ -120,7 +120,7 @@ export const deleteEmployee = async (req, res) => {
         const { id } = req.params;
         const employee = await Employee.findById(id);
         if (!employee) {
-            return res.status(404).json({ success: false, message: "Employee not found" });
+            return res.status(404).json({ success: false, error: "Employee not found" });
         }
         employee.isDeleted = true;
         employee.employmentStatus = "INACTIVE";

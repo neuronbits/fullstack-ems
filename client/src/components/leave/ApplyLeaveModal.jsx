@@ -19,9 +19,8 @@ const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
 
         try {
             const res = await api.post('/leave', data);
-            console.log(res);
-            //onSuccess();
-            //onClose();
+            onSuccess();
+            onClose();
         } catch (error) {
             toast.error(error.response?.data?.error || error.message);
         } finally {
