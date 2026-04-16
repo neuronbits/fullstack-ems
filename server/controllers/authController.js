@@ -32,8 +32,8 @@ export const login = async (req, res) => {
 
         const payload = {
             userId: user._id.toString(),
-            email: user.email,
             role: user.role,
+            email: user.email,
         }
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "7d" });
         // res.cookie("token", token, {
@@ -55,13 +55,13 @@ export const login = async (req, res) => {
 export const session = async (req, res) => {
     try {
         const session = req.session;
-        if (!session) {
-            return res.status(401).json({ error: "Unauthorized" });
-        }
+        // if (!session) {
+        //     return res.status(401).json({ error: "session Unauthorized" });
+        // }
         return res.json({ user: session });
         // const token = req.cookies.token;
         // if (!token) {
-        //     return res.status(401).json({ error: "Unauthorized" });
+        //     return res.status(401).json({ error: "session Unauthorized" });
         // }
         // const decoded = jwt.verify(token, process.env.JWT_SECRET);
         // return res.json({ user: decoded });
@@ -78,7 +78,7 @@ export const changePassword = async (req, res) => {
     try {
         const session = req.session;
         if (!session) {
-            return res.status(401).json({ error: "Unauthorized" });
+            return res.status(401).json({ error: "changePassword Unauthorized" });
         }
         const { currentPassword, newPassword } = req.body;
         if (!currentPassword || !newPassword) {
@@ -109,7 +109,7 @@ export const logout = async (req, res) => {
     try {
         const session = req.session;
         if (!session) {
-            return res.status(401).json({ error: "Unauthorized" });
+            return res.status(401).json({ error: "logout Unauthorized" });
         }
         req.session.destroy((err) => {
             if (err) {
