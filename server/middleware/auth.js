@@ -14,20 +14,16 @@ export const protect = (req, res, next) => {
         req.session = session;
         next();
     } catch (error) {
-        return res.status(500).json({ error: "Failed to protect" });
+        return res.status(401).json({ error: "protect catch block middlware Unauthorized" });
     }
 }
 
 export const protectAdmin = (req, res, next) => {
-    try {
-        if (!req.session.user) {
-            return res.status(401).json({ error: "protectAdmin session Unauthorized" });
-        }
-        if (req?.session?.role !== "ADMIN") {
-            return res.status(403).json({ error: "Admin access required" });
-        }
-        next();
-    } catch (error) {
-        return res.status(500).json({ error: "Failed to protect" });
+    // if (!req.session.user) {
+    //     return res.status(401).json({ error: "protectAdmin session Unauthorized" });
+    // }
+    if (req?.session?.role !== "ADMIN") {
+        return res.status(403).json({ error: "Admin access required" });
     }
+    next();
 }
