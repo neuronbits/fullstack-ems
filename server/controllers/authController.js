@@ -77,9 +77,6 @@ export const session = async (req, res) => {
 export const changePassword = async (req, res) => {
     try {
         const session = req.session;
-        if (!session) {
-            return res.status(401).json({ error: "changePassword Unauthorized" });
-        }
         const { currentPassword, newPassword } = req.body;
         if (!currentPassword || !newPassword) {
             return res.status(400).json({ error: "Current password and new password are required" });
@@ -94,7 +91,7 @@ export const changePassword = async (req, res) => {
             return res.status(400).json({ error: "Current password is incorrect" });
         }
         const hashed = await bcrypt.hash(newPassword, 10);
-        await user.findByIdAndUpdate(session.userId, { password: hashed });
+        await User.findByIdAndUpdate(session.userId, { password: hashed });
 
         return res.json({ success: true });
     } catch (error) {
