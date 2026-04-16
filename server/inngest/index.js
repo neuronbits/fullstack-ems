@@ -155,14 +155,15 @@ const attendanceReminderCron = inngest.createFunction(
                                 <p style="font-size: 16px;">Best Regards,</p>
                                 <p style="font-size: 16px;"><strong>QuickEMS</strong></p>
                             </div>
-                        `
+                        `;
                     sendEmail({
                         to: emp.email,
                         subject: "Attendance Reminder - Please Mark your Attendance",
                         body: attendanceRemindertemplate,
                     });
-
                 })
+                await Promise.all(emailPromises);
+                return { emailsSent: absentEmployees.length };
             });
         }
 

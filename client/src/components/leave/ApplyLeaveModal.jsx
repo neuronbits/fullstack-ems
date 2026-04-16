@@ -1,5 +1,7 @@
 import { Calendar, FileText, Loader2, Send, X } from 'lucide-react';
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
+import api from '../../api/axios';
 
 const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
 
@@ -11,6 +13,19 @@ const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const res = await api.post('/leave', data);
+            onSuccess();
+            onClose();
+        } catch (error) {
+            toast.error(error.response?.data?.error || error.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (!open) return null;
@@ -29,7 +44,7 @@ const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
                     </button>
                 </div>
 
-                <form className='p-6 space-y-5'>
+                <form onSubmit={handleSubmit} className='p-6 space-y-5'>
                     {/* -------- Leave Type ------------ */}
                     <div>
                         <label className='flex items-center gap-2 text-sm font-medium text-slate-700 mb-2'>
@@ -69,7 +84,7 @@ const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
                         <button type='button' onClick={onClose} className='btn-secondary flex-1'>
                             Cancel
                         </button>
-                        <button type='submit' disabled={loading} onClick={handleSubmit} className='btn-primary flex-1 flex items-center justify-center gap-2'>
+                        <button type='submit' disabled={loading} className='btn-primary flex-1 flex items-center justify-center gap-2'>
                             {loading ? <Loader2 className='w-4 h-4 animate-spin' /> : <Send className='w-4 h-4' />}
                             {loading ? 'Submitting...' : 'Submit'}
                         </button>

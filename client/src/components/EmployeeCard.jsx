@@ -1,9 +1,18 @@
 import { PencilIcon, Trash2Icon, TrashIcon } from 'lucide-react'
 import React from 'react'
+import toast from 'react-hot-toast';
+import api from '../api/axios';
 
 const EmployeeCard = ({ employee, onDelete, onEdit }) => {
     const handleDelete = async () => {
         if (!confirm(`Are you sure you want to delete ${employee.firstName} ${employee.lastName}?`)) return;
+        try {
+            await api.delete(`/employees/${employee._id}`);
+            onDelete(employee._id);
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response?.data?.error || error.message);
+        }
         // await onDelete(employee._id);
     }
     return (

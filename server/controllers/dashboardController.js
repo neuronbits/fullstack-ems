@@ -55,6 +55,6 @@ export const getDashboard = async (req, res) => {
         }
     } catch (error) {
         console.error("Dashboard error: ", error);
-        return res.status(500).json({ message: "Failed" });
+        return res.status(500).json({ error: "Failed" });
     }
 }

@@ -11,10 +11,10 @@ export const clockInOut = async (req, res) => {
         const session = req.session;
         const employee = await Employee.findOne({ userId: session.userId });
         if (!employee) {
-            return res.status(404).json({ message: "Employee not found" });
+            return res.status(404).json({ error: "Employee not found" });
         }
         if (employee.isDeleted) {
-            return res.status(403).json({ message: "Your account is deactivated. You cannot clock in/out." });
+            return res.status(403).json({ error: "Your account is deactivated. You cannot clock in/out." });
         }
 
         const today = new Date();
@@ -84,7 +84,7 @@ export const getAttendance = async (req, res) => {
         const session = req.session;
         const employee = await Employee.findOne({ userId: session.userId });
         if (!employee) {
-            return res.status(404).json({ message: "Employee not found" });
+            return res.status(404).json({ error: "Employee not found" });
         }
 
         const limit = parseInt(req.query.limit) || 30;
@@ -97,7 +97,7 @@ export const getAttendance = async (req, res) => {
         // const attendance = await Attendance.find({ employeeId }).skip(skip).limit(limit);
         // res.json(attendance);
     } catch (error) {
-        res.status(500).json({ message: "Error getting attendance", error });
+        res.status(500).json({ error: "Error getting attendance", error });
     }
 }
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { DEPARTMENTS } from '../assets/assets';
 import { Loader2Icon } from 'lucide-react';
+import toast from 'react-hot-toast';
+import api from '../api/axios';
 
 const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
     const navigate = useNavigate();
@@ -9,6 +11,56 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
     const isEditMode = !!initialData;
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
+        const formData = new FormData(e.currentTarget);
+        if (isEditMode) {
+            const pwd = formData.get('password');
+            if (!pwd) formData.delete('password');
+        }
+
+        try {
+            const url = isEditMode ? `/employees/${initialData.id}` : "/employees";
+            const method = isEditMode ? 'PUT' : 'POST';
+            await api[method.toLowerCase()](url, formData); // methos type must be in lower i.e put, post
+            // console.log(url);
+            // console.log(res);
+            // console.log(res.data);
+            onSuccess ? onSuccess() : navigate('/employees');
+
+            // const res = await fetch(url, {
+            //     method,
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data),
+            // });
+
+            // if (!res.ok) throw new Error('Failed to save employee');
+
+            // const result = await res.json();
+            // onSuccess(result);
+        } catch (error) {
+            toast.error(error.response?.data?.error || error.message);
+            console.error('Error saving employee:', error);
+            alert('Failed to save employee');
+        } finally {
+            setLoading(false);
+        }
+
+        const data = {
+            firstName: formData.get('firstName'),
+            lastName: formData.get('lastName'),
+            phone: formData.get('phone'),
+            joinDate: formData.get('joinDate'),
+            bio: formData.get('bio'),
+            department: formData.get('department'),
+            position: formData.get('position'),
+            basicSalary: formData.get('basicSalary'),
+            allowances: formData.get('allowances'),
+            deductions: formData.get('deductions'),
+            email: formData.get('email'),
+            password: formData.get('password'),
+            role: formData.get('role'),
+        };
     }
 
     return (
