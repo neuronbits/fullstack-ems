@@ -12,11 +12,13 @@ export const getEmployees = async (req, res) => {
         if (department) where.department = department;
         // const employees = await Employee.find(where ).sort({ createdAt: -1 }).populate("userId", "email role").lean();
         const employees = await Employee.find(where).sort({ createdAt: -1 }).populate("userId", "email role").lean();
+        console.log(employees);
         const result = employees.map((emp) => ({
             ...emp,
             id: emp._id.toString(),
             user: emp.userId ? { email: emp.userId.email, role: emp.userId.role } : null
         }));
+        console.log(result);
         return res.json(result);
         // res.status(200).json({ success: true, data: result });
     } catch (error) {
