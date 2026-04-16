@@ -7,6 +7,7 @@ import User from "../models/User.js";
 
 export const getEmployees = async (req, res) => {
     try {
+        console.log('getEmployees');
         const { department } = req.query;
         const where = {};
         if (department) where.department = department;

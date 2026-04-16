@@ -18,9 +18,9 @@ const Employees = () => {
         try {
             const url = selectedDept ? `/employees?department=${selectedDept}` : "/employees";
             const res = await api.get(url);
-            console.log(url);
-            console.log(res);
-            console.log(res.data);
+            // console.log(url);
+            // console.log(res.data);
+            // console.log(res);
             setEmployees(res.data);
         } catch (err) {
             console.error("Error fetching employees");

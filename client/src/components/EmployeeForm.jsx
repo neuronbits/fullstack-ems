@@ -20,12 +20,12 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
         }
 
         try {
-            const url = isEditMode ? `/employees/${initialData.id}` : '/employees';
+            const url = isEditMode ? `/employees/${initialData.id}` : "/employees";
             const method = isEditMode ? 'PUT' : 'POST';
-            const res = await api[method](url, formData)
-            console.log(url);
-            console.log(res);
-            console.log(res.data);
+            const res = await api[method](url, formData);
+            // console.log(url);
+            // console.log(res);
+            // console.log(res.data);
             // onSuccess ? onSuccess() : navigate('/employees');
 
             // const res = await fetch(url, {
