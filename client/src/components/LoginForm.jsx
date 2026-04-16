@@ -17,6 +17,7 @@ const LoginForm = ({ role, title, subtitle }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setEmail("admin@example.com");
         setError('');
         setLoading(true);
 
