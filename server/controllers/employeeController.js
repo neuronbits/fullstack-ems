@@ -31,7 +31,7 @@ export const getEmployees = async (req, res) => {
 export const createEmployee = async (req, res) => {
     try {
         const { firstName, lastName, email, phone, position, department, basicSalary, allowances, deductions, joinDate, password, role, bio } = req.body;
-        if (!email || !firstName || !lastName || !password) {
+        if (!email || !password || !firstName || !lastName) {
             return res.status(400).json({ error: "Missing required fields" });
         }
 
@@ -39,7 +39,8 @@ export const createEmployee = async (req, res) => {
         const user = await User.create({ email, password: hashed, role: role || "EMPLOYEE" });
         const employee = await Employee.create({
             userId: user._id, firstName, lastName, email, phone, position,
-            department: department || "Engineering", basicSalary: Number(basicSalary) || 0,
+            department: department || "Engineering",
+            basicSalary: Number(basicSalary) || 0,
             allowances: Number(allowances) || 0,
             deductions: Number(deductions) || 0,
             joinDate: new Date(joinDate),
