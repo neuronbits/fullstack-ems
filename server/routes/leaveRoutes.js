@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { createLeave, getLeaves, updateLeaveStatus } from "../controllers/leaveController.js";
-import { protect } from "../middleware/auth.js";
+import { protect, protectAdmin } from "../middleware/auth.js";
 
 const leaveRouter = Router();
 
 leaveRouter.post("/", protect, createLeave);
 leaveRouter.get("/", protect, getLeaves);
-leaveRouter.patch("/:id", protect, updateLeaveStatus);
+leaveRouter.patch("/:id", protect, protectAdmin, updateLeaveStatus);
 
 export default leaveRouter;

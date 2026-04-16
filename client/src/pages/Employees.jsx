@@ -3,7 +3,7 @@ import { DEPARTMENTS, dummyEmployeeData } from "../assets/assets";
 import { Plus, Search, X } from 'lucide-react';
 import EmployeeCard from '../components/EmployeeCard';
 import EmployeeForm from '../components/EmployeeForm';
-import api from '../api/axios.js';
+import api from '../api/axios';
 
 
 const Employees = () => {
@@ -93,9 +93,7 @@ const Employees = () => {
                             </button>
                         </div>
                         <div className='p-6'>
-                            {/* <form> */}
                             <EmployeeForm initialData={null} onSuccess={() => { setShowCreateModal(false); fetchEmployees(); }} onCancel={() => setShowCreateModal(false)} />
-                            {/* </form> */}
                         </div>
                     </div>
                 </div>
@@ -115,9 +113,7 @@ const Employees = () => {
                             </button>
                         </div>
                         <div className='p-6'>
-                            <form>
-                                <EmployeeForm initialData={editEmployee} onSuccess={() => { setEditEmployee(null); fetchEmployees(); }} onCancel={() => setEditEmployee(null)} />
-                            </form>
+                            <EmployeeForm initialData={editEmployee} onSuccess={() => { setEditEmployee(null); fetchEmployees(); }} onCancel={() => setEditEmployee(null)} />
                         </div>
                     </div>
                 </div>

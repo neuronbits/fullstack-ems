@@ -4,22 +4,23 @@ import { Link } from 'react-router-dom';
 
 const EmployeeDashboard = ({ data }) => {
     const emp = data.employee;
+
     const cards = [
         {
             icon: Calendar1Icon,
-            value: data.currentMonthAttendance,
+            value: emp.currentMonthAttendance,
             title: 'Days Present',
             subtitle: 'This month'
         },
         {
             icon: FileTextIcon,
-            value: data.pendingLeaves,
+            value: emp.pendingLeaves,
             title: 'Pending Leaves',
             subtitle: 'Awaiting approval'
         },
         {
             icon: DollarSignIcon,
-            value: data.latestPayslip ? `$${data.latestPayslip.netSalary?.toLocaleString()}` : 'N/A',
+            value: emp.latestPayslip ? `$${emp.latestPayslip.netSalary?.toLocaleString()}` : 'N/A',
             title: 'Latest Salary',
             subtitle: 'Most recent payout'
         }
