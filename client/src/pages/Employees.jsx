@@ -16,11 +16,14 @@ const Employees = () => {
 
     const fetchEmployees = useCallback(async () => {
         try {
-            const url = selectedDept ? `/employees?department=${selectedDept}` : `/employees`;
+            const url = selectedDept ? `/employees?department=${selectedDept}` : "/employees";
             const res = await api.get(url);
+            console.log(url);
+            console.log(res);
+            console.log(res.data);
             setEmployees(res.data);
         } catch (err) {
-            console.error("Error fetching employees", err);
+            console.error("Error fetching employees");
         } finally {
             setloading(false);
         }
