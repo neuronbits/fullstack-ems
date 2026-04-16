@@ -7,19 +7,23 @@ import User from "../models/User.js";
 
 export const getEmployees = async (req, res) => {
     try {
-        console.log('getEmployees');
+        // console.log('getEmployees');
+        // const user = await User.find();
+        // console.log(user);
+
+
         const { department } = req.query;
         const where = {};
         if (department) where.department = department;
-        // const employees = await Employee.find(where ).sort({ createdAt: -1 }).populate("userId", "email role").lean();
-        const employees = await Employee.find(where).sort({ createdAt: -1 }).populate("userId").lean();
-        console.log(employees);
+        const employees = await Employee.find(where).sort({ createdAt: -1 }).populate("userId", "email role").lean();
+
+        // console.log(employees);
         const result = employees.map((emp) => ({
             ...emp,
             id: emp._id.toString(),
             user: emp.userId ? { email: emp.userId.email, role: emp.userId.role } : null
         }));
-        console.log(result);
+        // console.log(result);
         return res.json(result);
         // res.status(200).json({ success: true, data: result });
     } catch (error) {

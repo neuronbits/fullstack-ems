@@ -93,9 +93,9 @@ const Employees = () => {
                             </button>
                         </div>
                         <div className='p-6'>
-                            <form>
-                                <EmployeeForm initialData={null} onSuccess={() => { setShowCreateModal(false); fetchEmployees(); }} onCancel={() => setShowCreateModal(false)} />
-                            </form>
+                            {/* <form> */}
+                            <EmployeeForm initialData={null} onSuccess={() => { setShowCreateModal(false); fetchEmployees(); }} onCancel={() => setShowCreateModal(false)} />
+                            {/* </form> */}
                         </div>
                     </div>
                 </div>
